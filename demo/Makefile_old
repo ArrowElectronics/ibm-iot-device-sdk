@@ -1,0 +1,67 @@
+#-----------------------------------------
+#  IOTF 
+#-----------------------------------------
+IOTF_DIR = ./iotf-embeddedc/lib
+IOTF_NAME = iotf.a
+
+IOTF_SRC_DIR = ./iotf-embeddedc
+IOTF_SRC_FILES += $(IOTF_SRC_DIR)/iotfclient.c
+
+MQTT_SRC_DIR = ./iotf-embeddedc/lib
+MQTT_SRC_FILES += $(MQTT_SRC_DIR)/MQTTClient.c            
+MQTT_SRC_FILES += $(MQTT_SRC_DIR)/MQTTLinux.c
+MQTT_SRC_FILES += $(MQTT_SRC_DIR)/MQTTFormat.c
+MQTT_SRC_FILES += $(MQTT_SRC_DIR)/MQTTPacket.c
+MQTT_SRC_FILES += $(MQTT_SRC_DIR)/MQTTDeserializePublish.c
+MQTT_SRC_FILES += $(MQTT_SRC_DIR)/MQTTConnectClient.c
+MQTT_SRC_FILES += $(MQTT_SRC_DIR)/MQTTSubscribeClient.c
+MQTT_SRC_FILES += $(MQTT_SRC_DIR)/MQTTSerializePublish.c
+MQTT_SRC_FILES += $(MQTT_SRC_DIR)/MQTTConnectServer.c
+MQTT_SRC_FILES += $(MQTT_SRC_DIR)/MQTTSubscribeServer.c
+MQTT_SRC_FILES += $(MQTT_SRC_DIR)/MQTTUnsubscribeServer.c
+MQTT_SRC_FILES += $(MQTT_SRC_DIR)/MQTTUnsubscribeClient.c
+
+IOTF_INC_DIRS += -I ./iotf-embeddedc
+IOTF_INC_DIRS += -I ./iotf-embeddedc/lib
+
+# Make static lib
+IOTF_COMPILER_FLAGS += -g
+
+IOTF_MAKE_CMD = $(CC) $(IOTF_INC_DIRS) $(IOTF_SRC_FILES) $(MQTT_SRC_FILES) $(IOTF_COMPILER_FLAGS) -o $(IOTF_DIR)/$(IOTF_NAME) 
+
+#-----------------------------------------
+#  DEMO 
+#----------------------------------------
+DEMO_DIR = ./demo/bin
+DEMO_NAME= ibm_demo
+
+DEMO_SRC_DIR = ./demo/src
+DEMO_SRC_FILES += $(DEMO_SRC_DIR)/ibm_demo.c
+
+DEMO_INC_DIRS = -I ./demo/inc
+
+DEMO_LIB_DIRS = -L $(IOTF_DIR) 
+
+DEMO_LIBS += -ldl -lm 
+
+DEMO_COMPILER_FLAGS += -g
+
+
+DEMO_MAKE_CMD = $(CC) $(DEMO_INC_DIRS) $(IOTF_INC_DIRS) $(IOTF_SRC_FILES) $(MQTT_SRC_FILES) $(DEMO_SRC_FILES) $(DEMO_COMPILER_FLAGS) $(DEMO_LIBS) -o $(DEMO_DIR)/$(DEMO_NAME) 
+
+
+all: 
+	ibm_demo
+
+iotf_lib:
+	$(DEBUG)mkdir -p $(IOTF_DIR)
+	$(DEBUG)$(IOTF_MAKE_CMD)
+
+ibm_demo:
+	$(DEBUG)mkdir -p $(DEMO_DIR)
+	$(DEBUG)$(DEMO_MAKE_CMD)
+
+clean:
+	rm -rf $(IOTF_DIR)/$(IOTF_LIB)
+	rm -rf $(DEMO_DIR)/$(DEMO_NAME)
+
