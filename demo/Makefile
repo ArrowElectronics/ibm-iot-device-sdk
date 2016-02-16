@@ -1,10 +1,10 @@
 #-----------------------------------------
 #  IOTF 
 #-----------------------------------------
-IOTF_DIR = ./iotf-embeddedc/lib
+IOTF_DIR = ../../iotf-embeddedc/lib
 IOTF_NAME = libiotf.a
 
-MQTT_SRC_DIR = ../iotf-embeddedc/lib
+MQTT_SRC_DIR = ../../iotf-embeddedc/lib
 #MQTT_SRC_FILES = $(wildcard $(MQTT_SRC_DIR)/*.c)
 MQTT_SRC_FILES += $(MQTT_SRC_DIR)/MQTTClient.c            
 MQTT_SRC_FILES += $(MQTT_SRC_DIR)/MQTTLinux.c
@@ -19,15 +19,15 @@ MQTT_SRC_FILES += $(MQTT_SRC_DIR)/MQTTSubscribeServer.c
 MQTT_SRC_FILES += $(MQTT_SRC_DIR)/MQTTUnsubscribeServer.c
 MQTT_SRC_FILES += $(MQTT_SRC_DIR)/MQTTUnsubscribeClient.c
 
-IOTF_SRC_DIR = ../iotf-embeddedc
+IOTF_SRC_DIR = ../../iotf-embeddedc
 IOTF_SRC_FILES += $(IOTF_SRC_DIR)/iotfclient.c
 IOTF_SRC_FILES += $(MQTT_SRC_FILES)
 
 IOTF_OBJ_FILES = $(IOTF_SRC_FILES:.c=.o)
 #OBJS = $(subst .c,.o,$(IOTF_SRC_FILES))
 
-IOTF_INC_DIRS += -I ../iotf-embeddedc
-IOTF_INC_DIRS += -I ../iotf-embeddedc/lib
+IOTF_INC_DIRS += -I ../../iotf-embeddedc
+IOTF_INC_DIRS += -I ../../iotf-embeddedc/lib
 
 # Make static lib
 IOTF_COMPILER_FLAGS += -Wall 
