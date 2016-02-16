@@ -3,6 +3,20 @@ Install prerequisites:
 sudo apt-get install git build-essential autoconf libtool swig3.0 python-dev nodejs-dev cmake pkg-config libpcre3-dev
 sudo apt-get clean
 
+Create Project directory:
+--------------------------------------------------------------------------------------------------
+mkdir ~/Projects
+
+Install Arrows ibm-iot-starter-kit repository:
+--------------------------------------------------------------------------------------------------
+git clone https://github.com/ArrowElectronics/ibm-iot-starter-kit 
+
+
+Install IBM-MQTT-Client:
+--------------------------------------------------------------------------------------------------
+git clone https://github.com/ibm-messaging/iotf-embeddedc.git
+cd iotf-embeddedc
+
 
 Install MRAA library:
 --------------------------------------------------------------------------------------------------
@@ -16,6 +30,7 @@ $ cmake ..
 $ make
 $ sudo make install
 $ sudo ldconfig /usr/local/lib/
+
 
 Install UPM library:
 --------------------------------------------------------------------------------------------------
@@ -32,7 +47,6 @@ $ make
 $ sudo make install
 $ sudo ldconfig /usr/local/lib/libupm-*
 
- 
 
 Configure the software:
 --------------------------------------------------------------------------------------------------
@@ -47,5 +61,7 @@ export PYTHONPATH="$PYTHONPATH:/usr/local/lib/python2.7/site-packages"
 EOF
 $ sudo cp /etc/profile.d/96boards-sensors.sh /etc/X11/Xsession.d/96boards-sensors
 
+Reboot the system:
+--------------------------------------------------------------------------------------------------
 Now reboot the system to pick up all the changes.
 $ sudo reboot
