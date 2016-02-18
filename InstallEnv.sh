@@ -10,7 +10,7 @@
 
 #Install prerequisites:
 #-------------------------------------------------------------------------------
-sudo apt-get-update
+sudo apt-get update
 sudo apt-get install -y git build-essential autoconf libtool swig3.0 \
 python-dev nodejs-dev cmake pkg-config libpcre3-dev
 sudo apt-get clean
