@@ -44,6 +44,7 @@ DEMO_NAME= ibm_demo
 
 DEMO_SRC_DIR = ./src
 DEMO_SRC_FILES += $(DEMO_SRC_DIR)/ibm_demo.c
+DEMO_SRC_FILES += $(DEMO_SRC_DIR)/util.c
 DEMO_SRC_FILES += $(DEMO_SRC_DIR)/sensor.cpp
 
 

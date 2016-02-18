@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <fcntl.h>
 
 #define MAC_ADDR_BUF_SIZE 50
 

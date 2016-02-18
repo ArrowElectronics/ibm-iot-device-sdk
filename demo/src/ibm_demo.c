@@ -102,7 +102,7 @@ int main(int argc, char *argv[])
 
 	if(demo)
     	{
-		deviceID = GetMACAddress();
+		deviceID = "RS1234"; //GetMACAddress();
 		orgID = "quickstart";
 
 		printf(	"##########################################\n"
