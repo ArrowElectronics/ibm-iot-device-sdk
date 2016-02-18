@@ -5,13 +5,13 @@
 #include "iotfclient.h"
 #include "logging.h"
 #include "sensor.h"
-
+#include "util.h"
 
 #define MAX_PAYLOAD_SIZE 100
 
 volatile int interrupt = 0;
 static char *configFilePath = "./demo/cfg/device.cfg";
-static char *deviceID = "0200185920c8"; //"1234567890";
+static char *deviceID = ""; 
 static char *orgID = "quickstart";
 static char *deviceType = "DB410c";
 static char *authMethod = "token";
@@ -102,10 +102,25 @@ int main(int argc, char *argv[])
 
 	if(demo)
     	{
-		deviceID = "0200185920c8"; //GetMACAddress()
+		deviceID = GetMACAddress();
 		orgID = "quickstart";
 
-    		printf("Configuring client with demo parameters:\n");
+		printf(	"##########################################\n"
+			"# DeviceID: %s\n"
+			"##########################################\n",deviceID);
+    		
+		printf(	"Configuring client with demo parameters:\n"
+			"OrgID=%s\n"
+			"DeviceType=%s\n"
+			"DeviceID=%s\n"
+			"AuthMethod=%s\n"
+			"AuthToken=%s\n"
+			,orgID
+   			,deviceType
+    			,deviceID
+    			,authMethod
+    			,authToken
+			);
     		rc = initialize( &client,
     					 orgID, 		// Quickstart service
     					 deviceType, 	// ""
@@ -128,7 +143,18 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		printf("Configuring client via cmdline:\n");
+		printf(	"Configuring client via cmdline:\n"
+			"OrgID=%s\n"
+			"DeviceType=%s\n"
+			"DeviceID=%s\n"
+			"AuthMethod=%s\n"
+			"AuthToken=%s\n"
+			,orgID
+   			,deviceType
+    			,deviceID
+    			,authMethod
+    			,authToken
+			);
 		rc = initialize( &client, 
 				 orgID, 
 				 deviceType, 	
