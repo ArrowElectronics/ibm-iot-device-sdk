@@ -51,7 +51,7 @@ sudo ldconfig /usr/local/lib/
 #UPM is an object oriented library of drivers for many Grove I2C devices, such 
 #as the Grove RGB backlight LCD module #included in this kit.
 #Be patient with this step. UPM takes about 23 minutes to build.
-
+cd ~/Projects
 sudo ln -s /usr/bin/swig3.0 /usr/bin/swig
 git clone https://github.com/intel-iot-devkit/upm
 cd upm
@@ -68,15 +68,12 @@ sudo ldconfig /usr/local/lib/libupm-*
 #The last step is to install some configuration files so that the development 
 #tools know which devices to uses. Fetch #the 96boards-tools package and install
 #the provided configuration files:
+cd ~/Projects
 sudo addgroup linaro i2c  # Allow the normal user to perform i2c operations
 git clone https://github.com/96boards/96boards-tools
 sudo cp 96boards-tools/70-96boards-common.rules /etc/udev/rules.d/
 
-cat | sudo tee /etc/profile.d/96boards-sensors.sh << EOF \
-export JAVA_TOOL_OPTIONS="-Dgnu.io.rxtx.SerialPorts=/dev/tty96B0" \
-export MONITOR_PORT=/dev/tty96B0 \
-export PYTHONPATH="$PYTHONPATH:/usr/local/lib/python2.7/site-packages" \
-EOF
+cat | sudo tee /etc/profile.d/96boards-sensors.sh << EOF export JAVA_TOOL_OPTIONS="-Dgnu.io.rxtx.SerialPorts=/dev/tty96B0" export MONITOR_PORT=/dev/tty96B0 export PYTHONPATH="$PYTHONPATH:/usr/local/lib/python2.7/site-packages" EOF
 sudo cp /etc/profile.d/96boards-sensors.sh /etc/X11/Xsession.d/96boards-sensors
 
 #Reboot the system:
