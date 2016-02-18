@@ -2,12 +2,14 @@
 #include <stdio.h>
 #include <signal.h>
 #include <unistd.h>
+#include <string.h>
 #include "iotfclient.h"
 #include "logging.h"
 #include "sensor.h"
 #include "util.h"
 
 #define MAX_PAYLOAD_SIZE 100
+#define MAX_STRING 20
 
 volatile int interrupt = 0;
 static char *configFilePath = "./demo/cfg/device.cfg";
@@ -86,7 +88,9 @@ int main(int argc, char *argv[])
 {
 	int rc = -1;
 	char buf[MAX_PAYLOAD_SIZE];
-
+	char *addr; 
+	char id[MAX_STRING];
+	
 	//
 	//Parse Input-parameters
 	//
@@ -102,7 +106,11 @@ int main(int argc, char *argv[])
 
 	if(demo)
     	{
-		deviceID = "RS1234"; //GetMACAddress();
+		
+
+		addr = GetMACAddress();
+		Strip(addr, id, ':' );
+		deviceID = id;
 		orgID = "quickstart";
 
 		printf(	"##########################################\n"
@@ -122,11 +130,11 @@ int main(int argc, char *argv[])
     			,authToken
 			);
     		rc = initialize( &client,
-    					 orgID, 		// Quickstart service
-    					 deviceType, 	// ""
-    					 deviceID, 		// GetMACAddress()
-    					 authMethod, 	// "token"
-    					 authToken);	// ""
+    					 orgID,
+    					 deviceType,
+    					 deviceID,
+    					 authMethod,
+    					 authToken);
     		if(rc != SUCCESS){
     		printf("initialize failed and returned rc = %d.\n Quitting..", rc);
     		return -1;
@@ -177,8 +185,6 @@ int main(int argc, char *argv[])
 
 	setCommandHandler(&client, myCallback);
 
-/**/
-	
 	void* sensor = CreateSensor();
 
 	while(!interrupt) 
