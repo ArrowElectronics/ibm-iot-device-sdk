@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=IBM Explore IoT
+Icon=chromium
+Exec=/usr/bin/chromium %U http://discover-iot.eu-gb.mybluemix.net/#/play?brand=arrow

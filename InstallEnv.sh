@@ -89,6 +89,8 @@ echo "------------------------------------------------------------------------"
 echo "Create a shortcut on the desktop                                        "  
 echo "------------------------------------------------------------------------"
 cp ~/Projects/ibm-iot-starter-kit/db410c_demo.desktop ~/Desktop
+cp ~/Projects/ibm-iot-starter-kit/ibm_iot_explore.desktop ~/Desktop
+
 
 echo -e "Installation complete. Ready to reboot(recommended)? (y/n):"
 read reply
