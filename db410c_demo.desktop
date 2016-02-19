@@ -3,3 +3,4 @@ Type=Application
 Name=DB410c Demo
 Icon=lxterminal
 Exec=/home/linaro/Projects/ibm-iot-starter-kit/demo/bin/ibm_demo
+Terminal=true
